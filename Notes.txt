@@ -1,0 +1,80 @@
+toBe: checks with === comparison
+
+toEqual: checks with Deep Equality comparison 
+It checks if objects have same key and same value with same type with same no of arguments
+
+Truthy Values are values which evaluates to true.
+Examples :
+ 1. Any number other than 0
+ 2. Any object even if empty, {}
+ 3. Any string, "hello"
+
+Falsy Values are values which evaluates to false.
+Examples:
+ 1. Zero, 0
+ 2. Empty string, ""
+ 3. undefined
+ 4. null
+ 5. NaN
+
+not : Invert the matcher following this expect
+expect(something).not.toBe(true);
+
+toBeUndefined() : expect the actual value to be undefined.
+
+toBeDefined() : expect the actual value to be defined. (Not undefined)
+
+toBeNull() : expect the actual value to be null.
+
+toContain(expected) : expect the actual value to contain a specific value.
+expect(array).toContain(anElement);
+expect(string).toContain(substring);
+
+toBeNaN() : expect the actual value to be NaN (Not a Number).
+
+
+toThrow(expectedopt) : expect a function to throw something.
+expected	Object(type)	<optional> : Value that should be thrown. If not provided, simply the fact that something was thrown will be checked.
+expect(function() { return 'things'; }).toThrow('foo');
+expect(function() { return 'stuff'; }).toThrow();
+
+toThrowError(expectedopt, messageopt) : expect a function to throw an Error.
+expected Error(type) <optional>: Error constructor the object that was thrown needs to be an instance of. If not provided, Error will be used.
+message	RegExp | String	<optional> : The message that should be set on the thrown Error
+expect(function() { return 'things'; }).toThrowError(MyCustomError, 'message');
+expect(function() { return 'things'; }).toThrowError(MyCustomError, /bar/);
+expect(function() { return 'stuff'; }).toThrowError(MyCustomError);
+expect(function() { return 'other'; }).toThrowError(/foo/);
+expect(function() { return 'other'; }).toThrowError();
+
+toMatch(expected) : expect the actual value to match a regular expression.
+expected RegExp | String(type)	: Value to look for in the string.
+expect("my string").toMatch(/string$/);
+expect("other string").toMatch("her");
+
+
+Asymmetric matchers
+
+anything() : usable in any matcher that uses Jasmine's equality (e.g. toEqual, toContain, or toHaveBeenCalledWith), 
+that will succeed if the actual value being compared is not null and not undefined.
+expect(calculator.total).toEqual(jasmine.anything());
+
+any(clazz) :  any matcher that uses Jasmine's equality (e.g. toEqual, toContain, or toHaveBeenCalledWith),
+that will succeed if the actual value being compared is an instance of the specified class/constructor.
+expect(calculator.total).toEqual(jasmine.any(Number));
+
+
+Custom matcher : You can create a custom matcher, it returns an object which has a function which takes two parameters actual, expected and return an object
+
+const customMatcher = {
+    return {
+        compare: function(actual,expected){
+            return{
+                Pass: true,
+                message: ""
+            }
+        }
+    }
+}
+
+this keyword in jasmine : In Jasmine, we can also initialize and share the variables between beforeEach, it, and afterEach using the this keyword
